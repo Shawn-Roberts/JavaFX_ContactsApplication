@@ -12,9 +12,6 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.cell.*?>
-<?import javafx.collections.*?>
-<?import com.Shawn.ContactsApp.datamodel.*?>
-<?import com.Shawn.ContactsApp.*?>
 
 
 <BorderPane fx:controller="com.Shawn.ContactsApp.MainController" xmlns:fx="http://javafx.com/fxml">
