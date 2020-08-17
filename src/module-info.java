@@ -3,4 +3,5 @@ module ContactsApplication {
     requires javafx.controls;
 
     opens com.Shawn.ContactsApp;
+
 }
