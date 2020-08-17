@@ -1,8 +1,60 @@
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.layout.GridPane?>
-
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<GridPane fx:controller="com.Shawn.ContactsApp.MainController"
-          xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10">
-</GridPane>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.cell.*?>
+<?import javafx.collections.*?>
+<?import com.Shawn.ContactsApp.datamodel.*?>
+<?import com.Shawn.ContactsApp.*?>
+
+
+<BorderPane fx:controller="com.Shawn.ContactsApp.MainController" xmlns:fx="http://javafx.com/fxml">
+    <top>
+        <VBox>
+            <ToolBar>
+                <HBox>
+                    <Button text="ADD">
+                        <tooltip>
+                            <Tooltip text="Add new to do item"></Tooltip>
+                        </tooltip>
+                    </Button>
+                    <Button text="Delete"></Button>
+                </HBox>
+            </ToolBar>
+        </VBox>
+
+    </top>
+    <center>
+        <TableView fx:id="contactTableView">
+            <columns>
+                <TableColumn text="First Name">
+                    <cellValueFactory><PropertyValueFactory property="firstName" /></cellValueFactory>
+                </TableColumn>
+                <TableColumn text="Last Name">
+                    <cellValueFactory><PropertyValueFactory property="lastName" /></cellValueFactory>
+                </TableColumn>
+                <TableColumn text="Phone Number">
+                    <cellValueFactory><PropertyValueFactory property="phoneNumber" /></cellValueFactory>
+                </TableColumn>
+                <TableColumn text="Notes">
+                    <cellValueFactory><PropertyValueFactory property="notes" /></cellValueFactory>
+                </TableColumn>
+            </columns>
+<!--            <items>-->
+<!--                <FXCollections fx:factory="observableArrayList">-->
+<!--                    <ContactModel firstName="Jacob"/>-->
+<!--                </FXCollections>-->
+<!--            </items>-->
+        </TableView>
+
+    </center>
+</BorderPane>
