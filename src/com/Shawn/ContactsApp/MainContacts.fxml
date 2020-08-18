@@ -31,6 +31,16 @@
                             </ImageView>
                         </graphic>
                     </Button>
+                    <Button fx:id="editButton" text="Edit Selected" disable="true">
+                        <tooltip>
+                            <Tooltip text="Edit currently selected contact"></Tooltip>
+                        </tooltip>
+                        <graphic>
+                            <ImageView>
+                                <Image url="@/toolbarButtonGraphics/general/Edit24.gif"></Image>
+                            </ImageView>
+                        </graphic>
+                    </Button>
                     <Button fx:id="deleteButton" text="Delete Selected" disable="true">
                         <tooltip>
                             <Tooltip text="Delete currently selected contact"></Tooltip>

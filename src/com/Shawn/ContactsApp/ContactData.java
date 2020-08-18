@@ -42,6 +42,13 @@ public class ContactData {
     {
         contacts.add(contact);
     }
+                //EDIT RECORD
+    public void editContact(Contact oldContact, Contact newContact){
+        oldContact.setFirstName(newContact.getFirstName());
+        oldContact.setLastName(newContact.getLastName());
+        oldContact.setPhoneNumber(newContact.getPhoneNumber());
+        oldContact.setNotes(newContact.getNotes());
+    }
                 //DELETE RECORD
     public void deleteContact(Contact contact){ contacts.remove(contact);}
 

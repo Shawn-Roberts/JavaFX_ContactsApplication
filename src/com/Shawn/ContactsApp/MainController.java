@@ -25,6 +25,9 @@ public class MainController {
     @FXML
     private Button addButton;
 
+    @FXML
+    private Button editButton;
+
 
     @FXML
     private Button deleteButton;
@@ -37,19 +40,21 @@ public class MainController {
         addButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                showNewItemDialog(addButton, "Add New Item", "AddContact.fxml");
+                showItemDialog(addButton, "Add New Item", "Add_Edit_Contact.fxml");
 
             }
         });
 
-        //DELETE BUTTON ENABLED
-        contactTableView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Contact>() {
+        //EDIT BUTTON PROESSED
+        editButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
-            public void changed(ObservableValue<? extends Contact> observableValue, Contact contact, Contact t1) {
-                deleteButton.setDisable(false);
+            public void handle(ActionEvent actionEvent) {
+                showItemDialog(editButton, "Edit Contact", "Add_Edit_Contact.fxml");
 
             }
         });
+
+
 
         //DELETE BUTTON PRESSED
         deleteButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -60,6 +65,25 @@ public class MainController {
         });
 
 
+        //BUTTONS ENABLED/DISABLE TOGGLE
+        contactTableView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Contact>() {
+            @Override
+            public void changed(ObservableValue<? extends Contact> observableValue, Contact contact, Contact t1) {
+                System.out.println(contactTableView.getSelectionModel().getSelectedCells().size());
+                if(contactTableView.getSelectionModel().getSelectedCells().size() == 1){
+                    editButton.setDisable(false);
+                    deleteButton.setDisable(false);
+                }
+                else{
+                    deleteButton.setDisable(true);
+                    editButton.setDisable(true);
+                }
+
+            }
+        });
+
+
+
 
         // LOAD DATA INTO FORM
         contactTableView.setItems(ContactData.getInstance().getContacts());
@@ -68,16 +92,40 @@ public class MainController {
 
 
     //METHODS
-    public void showNewItemDialog(Button b, String titleText, String location)
+    public void showItemDialog(Button b, String titleText, String location)
     {
         Dialog<ButtonType> dialog = new Dialog<>();
         dialog.initOwner(mainBorderPane.getScene().getWindow());
         dialog.setTitle(titleText);
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(getClass().getResource(location));
+
+
         try
         {
             dialog.getDialogPane().setContent(fxmlLoader.load());
+            ModifyDataController controller = fxmlLoader.getController();
+            if (b.equals(editButton))
+            {
+                controller.setDefaultText(contactTableView.getSelectionModel().getSelectedItem());
+            }
+
+            dialog.getDialogPane().getButtonTypes().add(ButtonType.OK);
+            dialog.getDialogPane().getButtonTypes().add(ButtonType.CANCEL);
+
+            Optional<ButtonType> result = dialog.showAndWait();
+            if(result.isPresent() && result.get() == ButtonType.OK)
+            {
+                if (b.equals(addButton))
+                {
+                    Contact c = controller.processResults();
+                }
+                else
+                    {
+                        Contact c =controller.processResults(contactTableView.getSelectionModel().getSelectedItem());
+                    }
+                contactTableView.refresh();
+            }
 
         }
         catch(IOException e)
@@ -87,16 +135,7 @@ public class MainController {
             return;
 
         }
-        dialog.getDialogPane().getButtonTypes().add(ButtonType.OK);
-        dialog.getDialogPane().getButtonTypes().add(ButtonType.CANCEL);
 
-        Optional<ButtonType> result = dialog.showAndWait();
-        if(result.isPresent() && result.get() == ButtonType.OK)
-        {
-            ModifyDataController controller = fxmlLoader.getController();
-            Contact c = controller.processResults();
-
-        }
     }
 
     public void deleteContact(Contact contact)
