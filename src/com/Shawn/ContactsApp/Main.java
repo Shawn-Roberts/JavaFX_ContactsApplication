@@ -6,7 +6,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import javax.xml.stream.XMLEventFactory;
 import javax.xml.stream.XMLStreamException;
 import java.io.IOException;
 

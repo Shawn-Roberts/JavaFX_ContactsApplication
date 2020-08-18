@@ -14,17 +14,33 @@
 <?import javafx.scene.control.cell.*?>
 
 
-<BorderPane fx:controller="com.Shawn.ContactsApp.MainController" xmlns:fx="http://javafx.com/fxml">
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<BorderPane fx:id="mainBorderPane" fx:controller="com.Shawn.ContactsApp.MainController" xmlns:fx="http://javafx.com/fxml">
     <top>
         <VBox>
             <ToolBar>
                 <HBox>
-                    <Button text="ADD">
+                    <Button fx:id="addButton" text="Add New">
                         <tooltip>
-                            <Tooltip text="Add new to do item"></Tooltip>
+                            <Tooltip text="Add new contact"></Tooltip>
                         </tooltip>
+                        <graphic>
+                            <ImageView>
+                                <Image url="@/toolbarButtonGraphics/general/Add24.gif"></Image>
+                            </ImageView>
+                        </graphic>
                     </Button>
-                    <Button text="Delete"></Button>
+                    <Button fx:id="deleteButton" text="Delete Selected" disable="true">
+                        <tooltip>
+                            <Tooltip text="Delete currently selected contact"></Tooltip>
+                        </tooltip>
+                        <graphic>
+                            <ImageView>
+                                <Image url="@/toolbarButtonGraphics/general/Delete24.gif"></Image>
+                            </ImageView>
+                        </graphic>
+                    </Button>
                 </HBox>
             </ToolBar>
         </VBox>
@@ -46,11 +62,6 @@
                     <cellValueFactory><PropertyValueFactory property="notes" /></cellValueFactory>
                 </TableColumn>
             </columns>
-<!--            <items>-->
-<!--                <FXCollections fx:factory="observableArrayList">-->
-<!--                    <ContactModel firstName="Jacob"/>-->
-<!--                </FXCollections>-->
-<!--            </items>-->
         </TableView>
 
     </center>

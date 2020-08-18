@@ -43,12 +43,11 @@ public class Contact {
         phoneNumber.set(phone);
     }
 
-
     public String getNotes() {
-        return phoneNumber.get();
+        return notes.get();
     }
 
     public void setNotes(String notes) {
-        phoneNumber.set(notes);
+        this.notes.set(notes);
     }
 }

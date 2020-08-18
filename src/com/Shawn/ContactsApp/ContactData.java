@@ -37,6 +37,14 @@ public class ContactData {
     {
         return contacts;
     }
+                // ADD RECORD
+    public void addContact(Contact contact)
+    {
+        contacts.add(contact);
+    }
+                //DELETE RECORD
+    public void deleteContact(Contact contact){ contacts.remove(contact);}
+
                 // READ FROM FILE
     public void loadContacts() throws IOException, XMLStreamException {
         try {
